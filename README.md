@@ -95,3 +95,43 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+
+# Terminal 1 — Start Emulator
+
+
+```sh
+# 1) Start your emulator (no snapshot load avoids corrupted quick-boot issues)
+& "$env:LOCALAPPDATA\Android\Sdk\emulator\emulator.exe" -avd Pixel_9_Pro -no-snapshot-load
+```
+
+# Terminal 2 — Verify device + start Metro
+
+```sh
+
+# 2) Go to project folder
+cd "K:\React Native\demo_proj\demo_01"
+
+# 3) Make sure ADB server is running and emulator is visible
+& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" kill-server
+& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" start-server
+& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" devices
+
+# 4) Start Metro bundler
+npx react-native start --reset-cache
+
+```
+
+# Terminal 3 — Install & Run app (connects to Metro)
+
+```sh
+# Use it when: First time running the project on that emulator/device , changed something native (inside android/), for example: added a new native library, changed permissions in AndroidManifest.xml, changed app ID / signing / gradle configs , You cleaned the build (android folder cleaned) or wiped emulator data etc. Basically, when you want to trigger a full native build and install of the app on the emulator/device.
+
+npx react-native run-android
+
+
+#For normal UI/code work (JS/TS): 
+
+npx react-native start
+
+```
